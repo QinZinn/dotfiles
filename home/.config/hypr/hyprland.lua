@@ -228,6 +228,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "Open f
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"), { description = "Lock screen" })
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout"), { description = "Open power menu" })
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper), { description = "Change wallpaper" })
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-wallpaper-picker"), { description = "Pick wallpaper" })
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"), { description = "Reload Waybar" })
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-screenshot"), { description = "Copy screenshot selection" })
 
@@ -242,8 +243,8 @@ end
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Next workspace" })
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), { description = "Previous workspace" })
 
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + left", hl.dsp.focus({ workspace = "e-1" }), { description = "Previous workspace" })
+hl.bind(mainMod .. " + right", hl.dsp.focus({ workspace = "e+1" }), { description = "Next workspace" })
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
