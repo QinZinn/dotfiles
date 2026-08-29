@@ -88,6 +88,7 @@ button:hover {
 #pulseaudio,
 #battery,
 #tray,
+#custom-slideshow,
 #custom-notification {
     border-radius: 10px;
     color: @nord4;
@@ -103,8 +104,17 @@ button:hover {
 #pulseaudio:hover,
 #battery:hover,
 #tray:hover,
+#custom-slideshow:hover,
 #custom-notification:hover {
     background: alpha(@nord1, 0.9);
+    color: @nord8;
+}
+
+#custom-slideshow {
+    color: @nord3;
+}
+
+#custom-slideshow.on {
     color: @nord8;
 }
 

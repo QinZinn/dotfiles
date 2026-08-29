@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+INTERVAL="${HYPR_SLIDESHOW_INTERVAL:-600}"
+
+while true; do
+    waypaper --random >/dev/null 2>&1 || true
+    sleep "$INTERVAL"
+done

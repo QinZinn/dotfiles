@@ -22,6 +22,7 @@
         "pulseaudio",
         "battery",
         "tray",
+        "custom/slideshow",
         "custom/notification"
     ],
 
@@ -97,6 +98,14 @@
     "tray": {
         "icon-size": 16,
         "spacing": 8
+    },
+
+    "custom/slideshow": {
+        "return-type": "json",
+        "exec": "hypr-slideshow --status",
+        "interval": 5,
+        "on-click": "hypr-slideshow --toggle",
+        "tooltip": true
     },
 
     "custom/notification": {

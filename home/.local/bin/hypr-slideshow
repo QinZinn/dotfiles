@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+STATE_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/hypr-slideshow"
+DAEMON="$HOME/.local/bin/hypr-slideshow-daemon"
+
+mkdir -p "$(dirname "$STATE_FILE")"
+
+is_on() {
+    pgrep -f "hypr-slideshow-daemon" >/dev/null 2>&1
+}
+
+start_daemon() {
+    if is_on; then
+        return
+    fi
+    setsid "$DAEMON" >/dev/null 2>&1 < /dev/null &
+    echo on > "$STATE_FILE"
+}
+
+stop_daemon() {
+    pkill -f "hypr-slideshow-daemon" 2>/dev/null || true
+    echo off > "$STATE_FILE"
+}
+
+case "${1:-}" in
+    --toggle)
+        if is_on; then
+            stop_daemon
+            notify-send -t 1500 "Slideshow" "Off (static wallpaper)" 2>/dev/null || true
+        else
+            start_daemon
+            notify-send -t 1500 "Slideshow" "On" 2>/dev/null || true
+        fi
+        ;;
+    --status)
+        if is_on; then
+            echo '{"text":"󰑘","class":"on","tooltip":"Slideshow: on"}'
+        else
+            echo '{"text":"󰔎","class":"off","tooltip":"Slideshow: off"}'
+        fi
+        ;;
+    --restore)
+        if [[ "$(cat "$STATE_FILE" 2>/dev/null || echo off)" == "on" ]]; then
+            start_daemon
+        fi
+        ;;
+    *)
+        echo "usage: hypr-slideshow {--toggle|--status|--restore}" >&2
+        exit 1
+        ;;
+esac

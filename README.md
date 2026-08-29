@@ -60,6 +60,10 @@ Themed apps are optional and installed on demand:
 
 Available apps: `brave`, `vscode`, `steam`, `spotify`, `vesktop`, `opencode`, `all`. Run `./setup help` for usage.
 
+### Wallpaper slideshow toggle
+
+A Waybar module (`󰔎`/`󰑘`) toggles between a static wallpaper and a slideshow (random wallpaper every 10 min via `waypaper --random`). Click it to toggle; the state persists across logins.
+
 ## Keybindings
 
 | Key | Action |
