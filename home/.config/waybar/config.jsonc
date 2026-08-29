@@ -19,7 +19,9 @@
         "cpu",
         "memory",
         "temperature",
+        "backlight",
         "pulseaudio",
+        "custom/mic",
         "battery",
         "tray",
         "custom/slideshow",
@@ -63,6 +65,23 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["󰔏", "󰔐", "󰔑"],
         "tooltip-format": "Temperature: {temperatureC}°C"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% 󰃟",
+        "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
+        "on-scroll-down": "brightnessctl -e4 -n2 set 5%-"
+    },
+
+    "custom/mic": {
+        "return-type": "json",
+        "exec": "hypr-mic status",
+        "interval": 2,
+        "on-click": "hypr-mic toggle",
+        "on-scroll-up": "hypr-mic up",
+        "on-scroll-down": "hypr-mic down",
+        "tooltip": true
     },
 
     "pulseaudio": {

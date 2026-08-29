@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "${1:-status}" in
+    status)
+        out="$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)"
+        vol="$(awk '/Volume:/{printf "%d", $2*100}' <<< "$out")"
+        if [[ "$out" == *MUTED* ]]; then
+            printf '{"text":"󰍭 %s%%","class":"muted","tooltip":"Mic muted"}' "$vol"
+        else
+            printf '{"text":"󰍬 %s%%","class":"active","tooltip":"Mic %s%%"}' "$vol" "$vol"
+        fi
+        ;;
+    toggle)
+        wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+        ;;
+    up)
+        wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+
+        ;;
+    down)
+        wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-
+        ;;
+    *)
+        echo "usage: hypr-mic {status|toggle|up|down}" >&2
+        exit 1
+        ;;
+esac

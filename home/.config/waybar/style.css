@@ -99,8 +99,10 @@ button:hover {
 #cpu,
 #memory,
 #temperature,
+#backlight,
 #network,
 #pulseaudio,
+#custom-mic,
 #battery,
 #tray,
 #custom-slideshow,
@@ -115,14 +117,24 @@ button:hover {
 #cpu:hover,
 #memory:hover,
 #temperature:hover,
+#backlight:hover,
 #network:hover,
 #pulseaudio:hover,
+#custom-mic:hover,
 #battery:hover,
 #tray:hover,
 #custom-slideshow:hover,
 #custom-notification:hover {
     background: alpha(@nord1, 0.9);
     color: @nord8;
+}
+
+#backlight {
+    color: @nord13;
+}
+
+#custom-mic.muted {
+    color: @nord11;
 }
 
 #custom-slideshow {
