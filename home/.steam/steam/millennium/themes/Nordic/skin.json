@@ -1,9 +1,0 @@
-{
-    "name": "Nordic",
-    "author": "zinnn",
-    "description": "Nordic Dark theme for Steam, matching the dotfiles color scheme.",
-    "tags": ["Nordic", "Nord", "Dark", "Minimal"],
-    "version": "1.0.0",
-    "Steam-WebKit": "webkit.css",
-    "UseDefaultPatches": true
-}

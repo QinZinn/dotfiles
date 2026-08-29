@@ -74,10 +74,11 @@ Nordic themes are included for Spotify (Spicetify) and Steam (Millennium).
 
 ### Spotify (Spicetify)
 
-Theme lives at `~/.config/spicetify/Themes/Nordic/`.
+Theme lives at `~/.config/spicetify/Themes/Nordic/` (Sleek base CSS + Nord `--spice-*` palette).
 
 ```bash
-sudo pacman -S --needed spicetify-cli   # or spicetify-bin
+sudo chown -R "$USER":"$USER" /opt/spotify   # only once, so spicetify can patch
+sudo pacman -S --needed spicetify-cli        # or spicetify-bin
 spicetify config current_theme Nordic
 spicetify config color_scheme base
 spicetify backup apply
@@ -87,10 +88,21 @@ Restart Spotify. `spicetify restore` undoes it.
 
 ### Steam (Millennium)
 
-Theme lives at `~/.steam/steam/millennium/themes/Nordic/`.
+Uses the [Material-Theme](https://github.com/kuska1/Material-Theme) base with a Nord `matugen.css` palette.
 
-1. Install the [Millennium Patcher](https://steambrew.app/).
-2. Launch Steam, open **Steam → Millennium → Themes**, select **Nordic**, restart Steam.
+1. Install Millennium: `yay -S millennium` (or `millennium-bin`).
+2. Install the theme base:
+   ```bash
+   git clone --depth=1 https://github.com/kuska1/Material-Theme.git \
+     ~/.steam/steam/millennium/themes/Material-Theme
+   ```
+3. Apply the Nord palette (from this repo):
+   ```bash
+   cp "$HOME/.config/millennium/nordic-matugen.css" \
+     ~/.steam/steam/millennium/themes/Material-Theme/css/main/colors/matugen.css
+   ```
+4. `~/.config/millennium/config.json` already selects `Material-Theme` with `Color=Matugen`, `Appearance=Dark`.
+5. Restart Steam.
 
 ## Dependencies
 
@@ -102,3 +114,4 @@ Theme lives at `~/.steam/steam/millennium/themes/Nordic/`.
 - Nordic GTK/Qt theme, Papirus-Dark icons, JetBrainsMono Nerd Font
 - SDDM + Qt5 QML (`qt5-declarative`)
 - `gnome-keyring`, `fcitx5` (+ gtk/qt), `brave-origin-bin`, `visual-studio-code-bin` (AUR)
+- Optional theming: `spicetify-cli` (Spotify), `millennium` (Steam)

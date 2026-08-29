@@ -1,0 +1,17 @@
+{
+  "general": {
+    "injectCSS": true,
+    "injectJavascript": true
+  },
+  "themes": {
+    "activeTheme": "Material-Theme",
+    "allowedStyles": true,
+    "allowedScripts": true,
+    "conditions": {
+      "Material-Theme": {
+        "Color": "Matugen",
+        "Appearance": "Dark"
+      }
+    }
+  }
+}
