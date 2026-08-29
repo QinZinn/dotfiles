@@ -13,6 +13,13 @@ Rectangle {
 
     property int sessionIndex: sessionModel.lastIndex
 
+    Component.onCompleted: {
+        if (userEntry.text === "")
+            userEntry.focus = true
+        else
+            password.focus = true
+    }
+
     TextConstants {
         id: textConstants
     }
@@ -86,7 +93,7 @@ Rectangle {
             font.pixelSize: 14
             textColor: "#D8DEE9"
             text: userModel.lastUser
-            focus: true
+            focus: false
 
             Keys.onReturnPressed: loginButton.clicked()
         }
