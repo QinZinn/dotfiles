@@ -19,7 +19,6 @@
         "cpu",
         "memory",
         "temperature",
-        "network",
         "pulseaudio",
         "battery",
         "tray",
@@ -63,18 +62,6 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["󰔏", "󰔐", "󰔑"],
         "tooltip-format": "Temperature: {temperatureC}°C"
-    },
-
-    "network": {
-        "interval": 3,
-        "format-wifi": "󰤨 {essid}",
-        "format-ethernet": "󰈀 {ifname}",
-        "format-linked": "󰈀 {ifname}",
-        "format-disconnected": "󰤭 offline",
-        "tooltip-format": "{ifname} via {gwaddr}\n{ipaddr}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname} via {gwaddr}",
-        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
-        "on-click": "nm-connection-editor"
     },
 
     "pulseaudio": {
