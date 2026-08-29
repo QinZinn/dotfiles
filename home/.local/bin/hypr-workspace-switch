@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MAX="${HYPR_WORKSPACE_MAX:-10}"
+dir="${1:-next}"
+
+current="$(hyprctl activeworkspace -j | jq -r '.id' 2>/dev/null)"
+current="${current:-1}"
+
+if [[ "$dir" == "next" ]]; then
+    target=$((current % MAX + 1))
+else
+    target=$((current - 1))
+    [[ "$target" -lt 1 ]] && target="$MAX"
+fi
+
+hyprctl dispatch workspace "$target"

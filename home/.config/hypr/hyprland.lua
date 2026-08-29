@@ -241,11 +241,11 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace " .. i })
 end
 
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Next workspace" })
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), { description = "Previous workspace" })
+hl.bind(mainMod .. " + mouse_down", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch next"), { description = "Next workspace" })
+hl.bind(mainMod .. " + mouse_up", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch prev"), { description = "Previous workspace" })
 
-hl.bind(mainMod .. " + left", hl.dsp.focus({ workspace = "e-1" }), { description = "Previous workspace" })
-hl.bind(mainMod .. " + right", hl.dsp.focus({ workspace = "e+1" }), { description = "Next workspace" })
+hl.bind(mainMod .. " + left", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch prev"), { description = "Previous workspace" })
+hl.bind(mainMod .. " + right", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch next"), { description = "Next workspace" })
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

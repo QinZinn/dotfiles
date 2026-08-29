@@ -34,8 +34,8 @@
             "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
-        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "on-scroll-up": "$HOME/.local/bin/hypr-workspace-switch next",
+        "on-scroll-down": "$HOME/.local/bin/hypr-workspace-switch prev",
         "disable-scroll": false
     },
 
