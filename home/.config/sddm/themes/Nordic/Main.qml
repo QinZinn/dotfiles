@@ -11,15 +11,15 @@ Rectangle {
     width: 1920
     height: 1080
 
-    property int sessionIndex: sessionModel.lastIndex(sessionModel.currentSession)
+    property int sessionIndex: sessionModel.lastIndex
 
     TextConstants {
         id: textConstants
     }
 
     Connections {
-        target: userModel
-        onLoginFailed: {
+        target: sddm
+        function onLoginFailed() {
             password.text = ""
             password.focus = true
         }
@@ -118,7 +118,7 @@ Rectangle {
             activeColor: "#81A1C1"
             pressedColor: "#5E81AC"
 
-            onClicked: userModel.login(userEntry.text, password.text, sessionIndex)
+            onClicked: sddm.login(userEntry.text, password.text, sessionIndex)
         }
 
         ComboBox {
@@ -155,9 +155,10 @@ Rectangle {
             textColor: "#D8DEE9"
             activeColor: "#4C566A"
             pressedColor: "#BF616A"
-            visible: powerModel.canReboot
+            visible: sddm.canReboot
+            enabled: sddm.canReboot
 
-            onClicked: powerModel.reboot()
+            onClicked: sddm.reboot()
         }
 
         Button {
@@ -170,9 +171,10 @@ Rectangle {
             textColor: "#D8DEE9"
             activeColor: "#4C566A"
             pressedColor: "#BF616A"
-            visible: powerModel.canShutdown
+            visible: sddm.canPowerOff
+            enabled: sddm.canPowerOff
 
-            onClicked: powerModel.shutdown()
+            onClicked: sddm.powerOff()
         }
     }
 
