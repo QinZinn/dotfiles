@@ -1,0 +1,78 @@
+/* Nordic extra styling for Spicetify */
+:root {
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord2: #434c5e;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord5: #e5e9f0;
+  --nord6: #eceff4;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord10: #5e81ac;
+  --nord11: #bf616a;
+  --nord13: #ebcb8b;
+  --nord14: #a3be8c;
+  --nord15: #b48ead;
+}
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif !important;
+}
+
+/* Rounded main UI */
+.main-view-container,
+.main-topBar-container,
+.Root__now-playing-bar,
+.main-entityHeader-background {
+  border-radius: 0;
+}
+
+/* Hover accent */
+button:hover,
+.main-navBar-navBarLink:hover,
+.main-collectionLinkButton:hover {
+  color: var(--nord8) !important;
+}
+
+/* Progress bar accent */
+.main-playbackBar-progressBar {
+  background: var(--nord3) !important;
+}
+.main-playbackBar-progressBarBg,
+.main-playbackBar-progressBarFill {
+  background-color: var(--nord8) !important;
+}
+
+/* Like button active (green) */
+.main-addButton-active,
+.main-heartButton-active {
+  color: var(--nord14) !important;
+}
+
+/* Selected list item */
+.main-trackList-trackListRow--highlighted {
+  background-color: rgba(136, 192, 208, 0.12) !important;
+}
+
+/* Context menu */
+.main-contextMenu-menu,
+.artist-context-menu {
+  background-color: var(--nord1) !important;
+  border: 1px solid var(--nord3) !important;
+  border-radius: 8px !important;
+}
+
+/* Cards */
+.main-card-card {
+  background-color: var(--nord1) !important;
+  border-radius: 10px !important;
+}
+.main-card-card:hover {
+  background-color: var(--nord2) !important;
+}
+
+/* Now playing bar */
+.Root__now-playing-bar {
+  background-color: var(--nord0) !important;
+}

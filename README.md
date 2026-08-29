@@ -68,6 +68,30 @@ Run the printed root commands, then log out and back in.
 | `Super + Left/Right` | Previous/next workspace |
 | `Super + Mouse wheel` | Next/previous workspace |
 
+## Spotify & Steam theming
+
+Nordic themes are included for Spotify (Spicetify) and Steam (Millennium).
+
+### Spotify (Spicetify)
+
+Theme lives at `~/.config/spicetify/Themes/Nordic/`.
+
+```bash
+sudo pacman -S --needed spicetify-cli   # or spicetify-bin
+spicetify config current_theme Nordic
+spicetify config color_scheme base
+spicetify backup apply
+```
+
+Restart Spotify. `spicetify restore` undoes it.
+
+### Steam (Millennium)
+
+Theme lives at `~/.steam/steam/millennium/themes/Nordic/`.
+
+1. Install the [Millennium Patcher](https://steambrew.app/).
+2. Launch Steam, open **Steam → Millennium → Themes**, select **Nordic**, restart Steam.
+
 ## Dependencies
 
 - Hyprland, Waybar, Rofi, SwayNC, Alacritty, Wlogout
