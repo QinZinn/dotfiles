@@ -14,6 +14,7 @@ sudo pacman -S --needed \
   network-manager-applet blueman polkit-kde-agent wlogout \
   thunar gvfs tumbler thunar-archive-plugin thunar-volman thunar-media-tags-plugin gvfs-mtp file-roller \
   qt5-wayland qt6-wayland qt5ct qt6ct kvantum kvantum-qt5 \
+  ffmpeg imagemagick \
   nordic-theme-git kvantum-theme-nordic-git papirus-icon-theme otf-font-awesome \
   ttf-jetbrains-mono-nerd noto-fonts \
   sddm qt5-declarative gnome-keyring \

@@ -68,7 +68,8 @@ Sau đó thực hiện các lệnh root được in ra, rồi logout/login.
 
 - Hyprland, Waybar, Rofi, SwayNC, Alacritty, Wlogout
 - `awww` (wallpaper backend, thay thế `swww`)
-- Grim/Slurp/wl-clipboard/cliphist
+- Grim/Slurp + ffplay (ffmpeg) + ImageMagick (screenshot có freeze)
+- wl-clipboard/cliphist
 - Thunar + plugins (archive, volman, media-tags, gvfs-mtp, file-roller)
 - Nordic GTK/Qt theme, Papirus-Dark icons, JetBrainsMono Nerd Font
 - SDDM + Qt5 QML (`qt5-declarative`)

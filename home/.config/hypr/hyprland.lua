@@ -169,6 +169,13 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "no-anim-ffplay",
+    match = { class = "^(ffplay|[Ff]fplay|SDL_App)$" },
+    no_anim = true,
+    no_shadow = true,
+})
+
+hl.window_rule({
     name = "fix-xwayland-drags",
     match = {
         class = "^$",
@@ -210,7 +217,7 @@ hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd(launcher), {
 })
 
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser), { description = "Open Brave Origin" })
-hl.bind(mainMod .. " + Q", hl.dsp.window.kill(), { description = "Close active window" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Close active window" })
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal), { description = "Open terminal" })
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor), { description = "Open VSCode" })

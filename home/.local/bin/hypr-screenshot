@@ -1,8 +1,55 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-geometry="$(slurp || true)"
-[[ -n "$geometry" ]] || exit 0
+if ! command -v grim >/dev/null 2>&1 || ! command -v slurp >/dev/null 2>&1 || ! command -v convert >/dev/null 2>&1; then
+    echo "screenshot: missing grim/slurp/imagemagick" >&2
+    exit 1
+fi
 
-grim -g "$geometry" - | wl-copy --type image/png
+monitor="$(hyprctl -j monitors | jq -r '.[] | select(.focused) | .name')"
+info="$(hyprctl -j monitors | jq -c ".[] | select(.name == \"$monitor\")")"
+scale="$(printf '%s' "$info" | jq -r '.scale')"
+m_x="$(printf '%s' "$info" | jq -r '.x')"
+m_y="$(printf '%s' "$info" | jq -r '.y')"
+
+tmp="$(mktemp /tmp/hypr-freeze.XXXXXX.png)"
+
+# 1. Capture the whole focused monitor first -> a stable frozen frame.
+grim -o "$monitor" "$tmp"
+
+# 2. Show the frozen frame fullscreen so the screen content cannot change
+#    while the user is selecting the area.
+if command -v ffplay >/dev/null 2>&1; then
+    ffplay -fs -loop 0 -loglevel quiet "$tmp" >/dev/null 2>&1 &
+    VIEWER=$!
+    sleep 0.4
+fi
+
+geometry="$(slurp || true)"
+
+if [[ -n "${VIEWER:-}" ]]; then
+    kill "$VIEWER" 2>/dev/null || true
+    pkill -f "ffplay.*${tmp##*/}" 2>/dev/null || true
+fi
+
+[[ -n "$geometry" ]] || { rm -f "$tmp"; exit 0; }
+
+# 3. geometry is "X,Y WxH" in logical global coordinates.
+x="$(printf '%s\n' "$geometry" | cut -d, -f1)"
+rest="$(printf '%s\n' "$geometry" | cut -d, -f2)"
+y="$(printf '%s\n' "$rest" | cut -d' ' -f1)"
+wh="$(printf '%s\n' "$rest" | cut -d' ' -f2)"
+w="$(printf '%s\n' "$wh" | cut -dx -f1)"
+h="$(printf '%s\n' "$wh" | cut -dx -f2)"
+
+# 4. Convert logical -> physical pixels relative to the monitor origin.
+px="$(awk -v a="$x" -v b="$m_x" -v s="$scale" 'BEGIN{v=(a-b)*s; if(v<0)v=0; printf "%d", v}')"
+py="$(awk -v a="$y" -v b="$m_y" -v s="$scale" 'BEGIN{v=(a-b)*s; if(v<0)v=0; printf "%d", v}')"
+pw="$(awk -v a="$w" -v s="$scale" 'BEGIN{printf "%d", a*s}')"
+ph="$(awk -v a="$h" -v s="$scale" 'BEGIN{printf "%d", a*s}')"
+
+# 5. Crop from the frozen frame and copy to clipboard.
+convert "$tmp" -crop "${pw}x${ph}+${px}+${py}" +repage png:- | wl-copy --type image/png
+
 notify-send -t 1800 "Screenshot" "Selected area copied to clipboard" 2>/dev/null || true
+rm -f "$tmp"
