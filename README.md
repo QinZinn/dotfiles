@@ -68,9 +68,26 @@ Run the printed root commands, then log out and back in.
 | `Super + Left/Right` | Previous/next workspace |
 | `Super + Mouse wheel` | Next/previous workspace |
 
-## Spotify & Steam theming
+## App theming
 
-Nordic themes are included for Spotify (Spicetify) and Steam (Millennium).
+Nordic themes are included for Spotify (Spicetify), Steam (Millennium), OpenCode and Vesktop.
+
+### OpenCode
+
+Theme lives at `~/.config/opencode/themes/nordic.json`, activated via `~/.config/opencode/tui.json`:
+
+```json
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "theme": "nordic"
+}
+```
+
+### Vesktop (Discord)
+
+Theme lives at `~/.config/vesktop/themes/nordic.theme.css` (system24 base + Nord palette). Enable it in **Settings → Vencord → Themes → Nordic**.
+
+### Spotify (Spicetify)
 
 ### Spotify (Spicetify)
 

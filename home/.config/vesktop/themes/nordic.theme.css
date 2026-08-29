@@ -1,0 +1,71 @@
+/**
+ * @name Nordic
+ * @description Nordic Dark Discord theme (system24 base) for Vesktop.
+ * @author zinnn
+ * @version 1.0.0
+ * @source https://github.com/refact0r/system24
+ */
+
+@import url('https://refact0r.github.io/system24/build/system24.css');
+
+/* Nordic palette override (1 = lightest, 5 = darkest) */
+:root {
+    --font: 'JetBrainsMono Nerd Font';
+    --code-font: 'JetBrainsMono Nerd Font';
+
+    --accent-1: #A5D8E2;
+    --accent-2: #88C0D0;
+    --accent-3: #76A9B8;
+    --accent-4: #6493A1;
+    --accent-5: #527C89;
+    --accent-new: #BF616A;
+
+    --bg-1: #434C5E;
+    --bg-2: #3B4252;
+    --bg-3: #2E3440;
+    --bg-4: #232733;
+    --bg-floating: #3B4252;
+
+    --text-1: #ECEFF4;
+    --text-2: #E5E9F0;
+    --text-3: #D8DEE9;
+    --text-4: #A6B4C6;
+    --text-5: #6E7B8E;
+
+    --red-1: #E38A91;
+    --red-2: #D1737B;
+    --red-3: #BF616A;
+    --red-4: #A7545C;
+    --red-5: #8F474E;
+
+    --green-1: #B5CC98;
+    --green-2: #A9C292;
+    --green-3: #A3BE8C;
+    --green-4: #8CA578;
+    --green-5: #768C64;
+
+    --blue-1: #9DB8D6;
+    --blue-2: #8FADCF;
+    --blue-3: #81A1C1;
+    --blue-4: #6F8AA7;
+    --blue-5: #5D738D;
+
+    --yellow-1: #F3DBA6;
+    --yellow-2: #EFD399;
+    --yellow-3: #EBCB8B;
+    --yellow-4: #C9AE77;
+    --yellow-5: #A89163;
+
+    --purple-1: #C6A5BF;
+    --purple-2: #BD99B6;
+    --purple-3: #B48EAD;
+    --purple-4: #9A7A94;
+    --purple-5: #80667B;
+
+    --hover: rgba(136, 192, 208, 0.08);
+    --active: rgba(136, 192, 208, 0.14);
+    --active-2: rgba(136, 192, 208, 0.22);
+    --border: #4C566A;
+    --dnd: #BF616A;
+    --idle: #EBCB8B;
+}
