@@ -49,6 +49,7 @@ Run the printed root commands, then log out and back in.
 Themed apps are optional and installed on demand:
 
 ```bash
+./setup install brave               # Brave Origin + default browser
 ./setup install vscode              # VSCode + Nord extension
 ./setup install steam               # Millennium + Material-Theme + Nord palette
 ./setup install spotify             # Spicetify + Nordic theme + apply
@@ -57,7 +58,7 @@ Themed apps are optional and installed on demand:
 ./setup install all                 # everything above
 ```
 
-Available apps: `vscode`, `steam`, `spotify`, `vesktop`, `opencode`, `all`. Run `./setup help` for usage.
+Available apps: `brave`, `vscode`, `steam`, `spotify`, `vesktop`, `opencode`, `all`. Run `./setup help` for usage.
 
 ## Keybindings
 

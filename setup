@@ -10,13 +10,14 @@ Usage: ./setup [command] [apps...]
 
 Commands:
   (none)              Full base setup (packages, symlinks, wallpapers, dark mode)
-  install <app...>    Install optional themed apps (vscode, steam, spotify, vesktop, opencode)
+  install <app...>    Install optional themed apps (vscode, steam, spotify, vesktop, opencode, brave)
   help                Show this help
 
 Examples:
   ./setup
   ./setup install vscode
   ./setup install steam spotify vesktop
+  ./setup install brave
   ./setup install all
 EOF
 }
@@ -94,21 +95,25 @@ setup_base() {
     ttf-jetbrains-mono-nerd noto-fonts \
     sddm qt5-declarative gnome-keyring \
     fcitx5 fcitx5-gtk fcitx5-qt \
-    brave-origin-bin ffmpeg imagemagick
+    ffmpeg imagemagick
 
   symlink_configs
   copy_wallpapers
   apply_dark_mode
-
-  if command -v xdg-settings >/dev/null 2>&1; then
-    xdg-settings set default-web-browser brave-origin.desktop || true
-  fi
 
   print_root_steps
   echo "==> Done. Run './setup help' to see optional themed apps."
 }
 
 # ── optional themed apps ───────────────────────────────────────────────────────
+
+install_brave() {
+  echo "==> Brave Origin"
+  sudo pacman -S --needed brave-origin-bin
+  if command -v xdg-settings >/dev/null 2>&1; then
+    xdg-settings set default-web-browser brave-origin.desktop || true
+  fi
+}
 
 install_vscode() {
   echo "==> VSCode"
@@ -148,6 +153,7 @@ install_opencode() {
 }
 
 install_all() {
+  install_brave
   install_vscode
   install_steam
   install_spotify
@@ -159,6 +165,7 @@ install_apps() {
   local app
   for app in "$@"; do
     case "$app" in
+      brave | brave-origin) install_brave ;;
       vscode | code) install_vscode ;;
       steam) install_steam ;;
       spotify) install_spotify ;;
