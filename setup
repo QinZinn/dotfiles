@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOME_DIR="$DOTFILES_DIR/home"
+
+usage() {
+  cat <<'EOF'
+Usage: ./setup [command] [apps...]
+
+Commands:
+  (none)              Full base setup (packages, symlinks, wallpapers, dark mode)
+  install <app...>    Install optional themed apps (vscode, steam, spotify, vesktop, opencode)
+  help                Show this help
+
+Examples:
+  ./setup
+  ./setup install vscode
+  ./setup install steam spotify vesktop
+  ./setup install all
+EOF
+}
+
+# ── helpers ────────────────────────────────────────────────────────────────────
+
+link_file() {
+  local src="$1" dst="$2"
+  [[ -e "$src" ]] || { echo "SKIP (missing): $src"; return; }
+  mkdir -p "$(dirname "$dst")"
+  if [[ -e "$dst" && ! -L "$dst" ]]; then
+    local bak="$dst.bak-$(date +%Y%m%d-%H%M%S)"
+    echo "Backup: $dst -> $bak"
+    mv "$dst" "$bak"
+  fi
+  ln -sfn "$src" "$dst"
+}
+
+symlink_configs() {
+  echo "==> Creating symlinks"
+  while IFS= read -r file; do
+    rel="${file#"$HOME_DIR"/}"
+    link_file "$file" "$HOME/$rel"
+  done < <(find "$HOME_DIR" -type f | sort)
+  chmod +x "$HOME/.local/bin"/hypr-* 2>/dev/null || true
+}
+
+copy_wallpapers() {
+  if [[ -d "$DOTFILES_DIR/wallpapers" ]]; then
+    mkdir -p "$HOME/Pictures/wallpapers"
+    cp -n "$DOTFILES_DIR"/wallpapers/* "$HOME/Pictures/wallpapers/"
+    echo "==> Wallpapers copied"
+  fi
+}
+
+apply_dark_mode() {
+  if command -v gsettings >/dev/null 2>&1; then
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark || true
+    gsettings set org.gnome.desktop.interface gtk-theme Nordic || true
+    gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark || true
+    gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 13' || true
+  fi
+}
+
+print_root_steps() {
+  cat <<'EOF'
+
+==> Root steps (run these manually, they require root):
+  # SDDM theme
+  sudo mkdir -p /usr/share/sddm/themes/Nordic
+  sudo cp -r "$HOME/.config/sddm/themes/Nordic/." /usr/share/sddm/themes/Nordic/
+  # SDDM config + logind no-sleep
+  sudo install -Dm644 "$HOME/.config/sddm.conf.d/10-nordic.conf" /etc/sddm.conf.d/10-nordic.conf
+  sudo install -Dm644 "$HOME/.config/systemd/logind.conf.d/90-no-sleep.conf" /etc/systemd/logind.conf.d/90-no-sleep.conf
+  # Services
+  sudo systemctl enable sddm
+  sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+  sudo systemctl reload systemd-logind
+
+==> Then log out and back in (or reboot) to apply the changes.
+EOF
+}
+
+# ── base setup ─────────────────────────────────────────────────────────────────
+
+setup_base() {
+  echo "==> Installing base packages"
+  sudo pacman -S --needed \
+    hyprland hypridle hyprlock waybar rofi swaync xdg-desktop-portal-hyprland \
+    awww waypaper grim slurp wl-clipboard cliphist brightnessctl playerctl \
+    network-manager-applet blueman polkit-kde-agent wlogout \
+    thunar gvfs tumbler thunar-archive-plugin thunar-volman thunar-media-tags-plugin gvfs-mtp file-roller \
+    qt5-wayland qt6-wayland qt5ct qt6ct kvantum kvantum-qt5 \
+    nordic-theme-git kvantum-theme-nordic-git papirus-icon-theme otf-font-awesome \
+    ttf-jetbrains-mono-nerd noto-fonts \
+    sddm qt5-declarative gnome-keyring \
+    fcitx5 fcitx5-gtk fcitx5-qt \
+    brave-origin-bin ffmpeg imagemagick
+
+  symlink_configs
+  copy_wallpapers
+  apply_dark_mode
+
+  if command -v xdg-settings >/dev/null 2>&1; then
+    xdg-settings set default-web-browser brave-origin.desktop || true
+  fi
+
+  print_root_steps
+  echo "==> Done. Run './setup help' to see optional themed apps."
+}
+
+# ── optional themed apps ───────────────────────────────────────────────────────
+
+install_vscode() {
+  echo "==> VSCode"
+  yay -S --needed visual-studio-code-bin
+  code --install-extension arcticicestudio.nord-visual-studio-code --force || true
+}
+
+install_steam() {
+  echo "==> Steam (Millennium)"
+  yay -S --needed millennium
+  local theme_dir="$HOME/.steam/steam/millennium/themes/Material-Theme"
+  if [[ ! -f "$theme_dir/skin.json" ]]; then
+    mkdir -p "$(dirname "$theme_dir")"
+    git clone --depth=1 https://github.com/kuska1/Material-Theme.git "$theme_dir"
+  fi
+  mkdir -p "$theme_dir/css/main/colors"
+  cp "$HOME/.config/millennium/nordic-matugen.css" "$theme_dir/css/main/colors/matugen.css"
+  echo "==> Restart Steam and select Material-Theme (Color=Matugen, Dark) in Steam -> Millennium."
+}
+
+install_spotify() {
+  echo "==> Spotify (Spicetify)"
+  yay -S --needed spicetify-bin
+  sudo chown -R "$USER":"$USER" /opt/spotify || true
+  spicetify config current_theme Nordic color_scheme base
+  spicetify backup apply
+}
+
+install_vesktop() {
+  echo "==> Vesktop"
+  sudo pacman -S --needed vesktop
+  echo "==> Enable Nordic theme in Settings -> Vencord -> Themes."
+}
+
+install_opencode() {
+  echo "==> OpenCode theme is already symlinked (no package needed)."
+}
+
+install_all() {
+  install_vscode
+  install_steam
+  install_spotify
+  install_vesktop
+  install_opencode
+}
+
+install_apps() {
+  local app
+  for app in "$@"; do
+    case "$app" in
+      vscode | code) install_vscode ;;
+      steam) install_steam ;;
+      spotify) install_spotify ;;
+      vesktop) install_vesktop ;;
+      opencode) install_opencode ;;
+      all) install_all ;;
+      *) echo "Unknown app: $app"; usage; exit 1 ;;
+    esac
+  done
+}
+
+# ── entry point ────────────────────────────────────────────────────────────────
+
+main() {
+  local cmd="${1:-}"
+  case "$cmd" in
+    "" | base | setup) setup_base ;;
+    install)
+      shift
+      [[ $# -gt 0 ]] || { usage; exit 1; }
+      install_apps "$@"
+      ;;
+    help | -h | --help) usage ;;
+    *) usage; exit 1 ;;
+  esac
+}
+
+main "$@"

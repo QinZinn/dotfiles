@@ -32,17 +32,32 @@ Nordic Dark Hyprland configuration for Arch/CachyOS.
 
 ```bash
 cd ~/Projects/dotfiles
-./install.sh
+./setup
 ```
 
 The script will:
-1. Install packages (pacman + yay).
+1. Install base packages (pacman).
 2. Symlink configs into `$HOME` (existing files are backed up as `.bak-<timestamp>`).
 3. Copy wallpapers into `~/Pictures/wallpapers`.
-4. Apply dark mode (gsettings), install the VSCode Nord theme, set the default browser.
+4. Apply dark mode (gsettings), set the default browser.
 5. Print the root steps that must be run manually (SDDM theme, logind, enable sddm, mask sleep).
 
 Run the printed root commands, then log out and back in.
+
+### Optional themed apps
+
+Themed apps are optional and installed on demand:
+
+```bash
+./setup install vscode              # VSCode + Nord extension
+./setup install steam               # Millennium + Material-Theme + Nord palette
+./setup install spotify             # Spicetify + Nordic theme + apply
+./setup install vesktop             # Vesktop (theme is in the config)
+./setup install opencode            # OpenCode Nord theme (no package needed)
+./setup install all                 # everything above
+```
+
+Available apps: `vscode`, `steam`, `spotify`, `vesktop`, `opencode`, `all`. Run `./setup help` for usage.
 
 ## Keybindings
 
