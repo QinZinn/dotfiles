@@ -83,7 +83,7 @@ xdg-settings set default-web-browser brave-origin.desktop || true
 # ------------------------------------------------------------------
 cat <<'EOF'
 
-==> Các bước cần root (chạy thủ công, vì cần quyền root):
+==> Root steps (run these manually, they require root):
   # SDDM theme
   sudo mkdir -p /usr/share/sddm/themes/Nordic
   sudo cp -r "$HOME/.config/sddm/themes/Nordic/." /usr/share/sddm/themes/Nordic/
@@ -95,7 +95,7 @@ cat <<'EOF'
   sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
   sudo systemctl reload systemd-logind
 
-==> Sau đó logout/login (hoặc reboot) để áp dụng.
+==> Then log out and back in (or reboot) to apply the changes.
 EOF
 
 echo "==> Done."

@@ -1,13 +1,15 @@
 # dotfiles
 
-Cấu hình Hyprland (Nordic Dark) cho máy CachyOS/Arch.
+Nordic Dark Hyprland configuration for Arch/CachyOS.
 
-## Cấu trúc
+![Preview](preview.png)
+
+## Structure
 
 ```
 .
 ├── install.sh
-├── home/                    # phản chiếu $HOME
+├── home/                    # mirrors $HOME
 │   ├── .config/
 │   │   ├── hypr/            # hyprland.lua, hypridle.conf, hyprlock.conf
 │   │   ├── waybar/
@@ -26,49 +28,49 @@ Cấu hình Hyprland (Nordic Dark) cho máy CachyOS/Arch.
 └── wallpapers/
 ```
 
-## Cài đặt
+## Install
 
 ```bash
 cd ~/Projects/dotfiles
 ./install.sh
 ```
 
-Script sẽ:
-1. Cài packages (pacman + yay).
-2. Symlink config vào `$HOME` (file cũ được backup thành `.bak-<timestamp>`).
-3. Copy wallpapers vào `~/Pictures/wallpapers`.
-4. Áp dụng dark mode (gsettings), cài VSCode Nord theme, set browser mặc định.
-5. In các bước cần root (SDDM theme, logind, enable sddm, mask sleep).
+The script will:
+1. Install packages (pacman + yay).
+2. Symlink configs into `$HOME` (existing files are backed up as `.bak-<timestamp>`).
+3. Copy wallpapers into `~/Pictures/wallpapers`.
+4. Apply dark mode (gsettings), install the VSCode Nord theme, set the default browser.
+5. Print the root steps that must be run manually (SDDM theme, logind, enable sddm, mask sleep).
 
-Sau đó thực hiện các lệnh root được in ra, rồi logout/login.
+Run the printed root commands, then log out and back in.
 
 ## Keybindings
 
-| Phím | Tác vụ |
+| Key | Action |
 |---|---|
 | `Super` | Rofi launcher |
 | `Super + W` | Brave Origin |
-| `Super + Q` | Đóng cửa sổ |
+| `Super + Q` | Close window |
 | `Super + T` / `Super + Enter` | Alacritty |
 | `Super + C` | VSCode |
 | `Super + F` | Fullscreen |
 | `Super + V` | Clipboard history |
 | `Super + N` | Notification center |
 | `Super + E` | Thunar |
-| `Super + L` | Khóa màn hình |
+| `Super + L` | Lock screen |
 | `Super + M` | Wlogout |
-| `Super + Shift + S` | Screenshot vùng (clipboard) |
-| `Super + Shift + W` | Đổi wallpaper |
-| `Super + 1..9,0` | Chuyển workspace |
-| `Super + Alt + 1..9,0` | Gửi cửa sổ sang workspace |
-| `Super + Shift + 1..9,0` | Move window sang workspace |
-| `Super + Mouse wheel` | Workspace kế tiếp/trước |
+| `Super + Shift + S` | Screenshot region (clipboard) |
+| `Super + Shift + W` | Change wallpaper |
+| `Super + 1..9,0` | Switch workspace |
+| `Super + Alt + 1..9,0` | Move window to workspace |
+| `Super + Shift + 1..9,0` | Move window to workspace |
+| `Super + Mouse wheel` | Next/previous workspace |
 
-## Phụ thuộc
+## Dependencies
 
 - Hyprland, Waybar, Rofi, SwayNC, Alacritty, Wlogout
-- `awww` (wallpaper backend, thay thế `swww`)
-- Grim/Slurp + ffplay (ffmpeg) + ImageMagick (screenshot có freeze)
+- `awww` (wallpaper backend, replaces `swww`)
+- Grim/Slurp + ffplay (ffmpeg) + ImageMagick (frozen-region screenshots)
 - wl-clipboard/cliphist
 - Thunar + plugins (archive, volman, media-tags, gvfs-mtp, file-roller)
 - Nordic GTK/Qt theme, Papirus-Dark icons, JetBrainsMono Nerd Font
