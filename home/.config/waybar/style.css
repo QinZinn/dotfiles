@@ -1,0 +1,137 @@
+@define-color nord0 #2E3440;
+@define-color nord1 #3B4252;
+@define-color nord3 #4C566A;
+@define-color nord4 #D8DEE9;
+@define-color nord8 #88C0D0;
+@define-color nord9 #81A1C1;
+@define-color nord11 #BF616A;
+@define-color nord14 #A3BE8C;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+window#waybar {
+    background: transparent;
+    color: @nord4;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: alpha(@nord0, 0.96);
+    border: 1px solid alpha(@nord8, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 4px 18px alpha(#000000, 0.28);
+    margin: 0 4px;
+    padding: 3px 6px;
+}
+
+.modules-left {
+    padding-left: 4px;
+}
+
+.modules-center {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.modules-right {
+    padding-right: 4px;
+}
+
+button {
+    border: none;
+    border-radius: 11px;
+    box-shadow: none;
+    color: @nord3;
+    margin: 0 1px;
+    padding: 0 9px;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+button:hover {
+    background: alpha(@nord9, 0.24);
+    box-shadow: none;
+    color: @nord4;
+}
+
+#workspaces button.active {
+    background: @nord8;
+    color: @nord0;
+}
+
+#workspaces button.visible {
+    color: @nord9;
+}
+
+#workspaces button.empty {
+    color: alpha(@nord3, 0.72);
+}
+
+#workspaces button.urgent {
+    background: @nord11;
+    color: @nord0;
+}
+
+#clock {
+    color: @nord8;
+    padding: 0 4px;
+}
+
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#battery,
+#tray,
+#custom-notification {
+    border-radius: 10px;
+    color: @nord4;
+    margin: 0 1px;
+    padding: 0 8px;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#tray:hover,
+#custom-notification:hover {
+    background: alpha(@nord1, 0.9);
+    color: @nord8;
+}
+
+#temperature.critical,
+#battery.critical:not(.charging) {
+    color: @nord11;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @nord14;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+    color: @nord11;
+}
+
+#custom-notification {
+    color: @nord8;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: @nord11;
+}

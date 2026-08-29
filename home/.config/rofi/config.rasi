@@ -1,0 +1,18 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    font: "JetBrainsMono Nerd Font 13";
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    sort: true;
+    cycle: true;
+    steal-focus: true;
+    click-to-exit: true;
+    display-drun: "Applications";
+    display-run: "Command";
+    display-window: "Windows";
+    kb-cancel: "Escape";
+}
+
+@theme "theme.rasi"

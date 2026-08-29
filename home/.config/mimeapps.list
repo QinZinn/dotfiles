@@ -1,0 +1,11 @@
+[Default Applications]
+text/html=brave-origin.desktop
+x-scheme-handler/http=brave-origin.desktop
+x-scheme-handler/https=brave-origin.desktop
+x-scheme-handler/about=brave-origin.desktop
+x-scheme-handler/unknown=brave-origin.desktop
+x-scheme-handler/discord=vesktop.desktop
+text/markdown=code.desktop
+
+[Added Associations]
+text/markdown=code.desktop;

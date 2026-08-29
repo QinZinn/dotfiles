@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -u
+
+selection="$(cliphist list | rofi -dmenu -config "$HOME/.config/rofi/config.rasi" -p 'Clipboard' || true)"
+[[ -n "$selection" ]] || exit 0
+
+printf '%s\n' "$selection" | cliphist decode | wl-copy

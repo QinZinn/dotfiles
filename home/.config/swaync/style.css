@@ -1,0 +1,176 @@
+:root {
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord11: #bf616a;
+  --nord14: #a3be8c;
+  --surface: rgba(46, 52, 64, 0.96);
+  --surface-alt: rgba(59, 66, 82, 0.92);
+  --border: rgba(136, 192, 208, 0.28);
+  --text: #d8dee9;
+  --text-muted: rgba(216, 222, 233, 0.7);
+  --radius: 16px;
+  --transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+}
+
+notificationwindow,
+blankwindow {
+  background: transparent;
+}
+
+.floating-notifications {
+  background: transparent;
+  padding: 8px;
+}
+
+.notification-row {
+  background: transparent;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-row .notification-background {
+  background: transparent;
+  padding: 5px 8px;
+}
+
+.notification-row .notification-background .notification {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
+  color: var(--text);
+  padding: 4px;
+  transition: var(--transition);
+}
+
+.notification-row .notification-background .notification:hover {
+  background: var(--surface-alt);
+  border-color: rgba(136, 192, 208, 0.58);
+}
+
+.notification-row .notification-background .notification.critical {
+  border-color: rgba(191, 97, 106, 0.72);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  color: var(--text);
+  padding: 8px;
+  transition: var(--transition);
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: rgba(129, 161, 193, 0.16);
+}
+
+.notification-content .summary {
+  color: var(--nord8);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.notification-content .body {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.notification-content .time {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.close-button {
+  background: rgba(191, 97, 106, 0.18);
+  border: none;
+  border-radius: 999px;
+  color: var(--nord4);
+  margin: 8px 8px 0 0;
+  min-height: 22px;
+  min-width: 22px;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.close-button:hover {
+  background: var(--nord11);
+  color: var(--nord0);
+}
+
+.control-center {
+  background: rgba(46, 52, 64, 0.98);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 42px rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  padding: 10px;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.widget {
+  background: rgba(59, 66, 82, 0.7);
+  border: 1px solid rgba(129, 161, 193, 0.16);
+  border-radius: 13px;
+  margin: 6px;
+  padding: 10px;
+}
+
+.widget-title > label {
+  color: var(--nord8);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.widget-title > button,
+.widget-dnd switch,
+.widget-mpris button {
+  background: rgba(136, 192, 208, 0.12);
+  border: 1px solid rgba(136, 192, 208, 0.2);
+  border-radius: 10px;
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.widget-title > button:hover,
+.widget-dnd switch:hover,
+.widget-mpris button:hover {
+  background: var(--nord8);
+  color: var(--nord0);
+}
+
+.widget-dnd label {
+  color: var(--text-muted);
+}
+
+.widget-mpris {
+  color: var(--text);
+}
+
+.widget-mpris-player {
+  background: rgba(46, 52, 64, 0.72);
+  border-radius: 12px;
+  margin: 4px;
+  padding: 8px;
+}
+
+.notification-group-headers,
+.notification-group-buttons {
+  color: var(--text-muted);
+}
+
+.control-center-list-placeholder {
+  color: var(--text-muted);
+}

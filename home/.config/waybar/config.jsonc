@@ -1,0 +1,134 @@
+// Nordic Dark Waybar configuration.
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "margin": "8 10 0",
+    "spacing": 0,
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
+
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "temperature",
+        "network",
+        "pulseaudio",
+        "battery",
+        "tray",
+        "custom/notification"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "all-outputs": false,
+        "sort-by": "number",
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "disable-scroll": false
+    },
+
+    "clock": {
+        "format": "{:%H:%M  ·  %a %d %b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+        "interval": 1
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "{usage:2}% 󰍛",
+        "tooltip-format": "CPU usage: {usage}%"
+    },
+
+    "memory": {
+        "interval": 2,
+        "format": "{percentage:2}% 󰘚",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)"
+    },
+
+    "temperature": {
+        "interval": 5,
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["󰔏", "󰔐", "󰔑"],
+        "tooltip-format": "Temperature: {temperatureC}°C"
+    },
+
+    "network": {
+        "interval": 3,
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-linked": "󰈀 {ifname}",
+        "format-disconnected": "󰤭 offline",
+        "tooltip-format": "{ifname} via {gwaddr}\n{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname} via {gwaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+        "on-click": "nm-connection-editor"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}󰂯",
+        "format-muted": "󰝟 muted",
+        "format-bluetooth-muted": "󰝟 󰂯",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "tooltip-format": "{desc}\nVolume: {volume}%",
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% 󰚥",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁼", "󰁾", "󰂀"],
+        "tooltip-format": "{capacity}% - {time} remaining"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "custom/notification": {
+        "return-type": "json",
+        "exec-if": "command -v swaync-client",
+        "exec": "swaync-client --subscribe-waybar",
+        "format": "{icon} {0}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "on-click": "swaync-client --toggle-panel --skip-wait",
+        "on-click-right": "swaync-client --toggle-dnd --skip-wait",
+        "tooltip": false
+    }
+}

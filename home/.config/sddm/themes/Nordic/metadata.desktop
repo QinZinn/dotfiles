@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=Nordic
+Description=Minimal Nordic dark SDDM theme
+Author=zinnn
+Type=sddm-theme
+Version=0.1
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-Id=Nordic
+Theme-API=2.0

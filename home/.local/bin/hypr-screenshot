@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+geometry="$(slurp || true)"
+[[ -n "$geometry" ]] || exit 0
+
+grim -g "$geometry" - | wl-copy --type image/png
+notify-send -t 1800 "Screenshot" "Selected area copied to clipboard" 2>/dev/null || true

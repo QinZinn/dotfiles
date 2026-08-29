@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -u
+
+if command -v xdg-user-dir >/dev/null 2>&1; then
+    pictures_dir="$(xdg-user-dir PICTURES 2>/dev/null || true)"
+else
+    pictures_dir="$HOME/Pictures"
+fi
+pictures_dir="${pictures_dir:-$HOME/Pictures}"
+wallpaper_dir="$pictures_dir/wallpapers"
+
+notify_error() {
+    notify-send -u critical "Wallpaper" "$1" 2>/dev/null || true
+    printf 'Wallpaper: %s\n' "$1" >&2
+}
+
+if [[ ! -d "$wallpaper_dir" ]]; then
+    notify_error "No wallpaper directory: $wallpaper_dir"
+    exit 1
+fi
+
+images=()
+shopt -s nullglob
+for image in "$wallpaper_dir"/*; do
+    [[ -f "$image" ]] || continue
+    case "${image,,}" in
+        *.jpg|*.jpeg|*.png|*.webp|*.gif|*.avif)
+            images+=("$image")
+            ;;
+    esac
+done
+
+if (( ${#images[@]} == 0 )); then
+    notify_error "Add a JPG, PNG, WEBP, GIF or AVIF image to $wallpaper_dir"
+    exit 1
+fi
+
+if ! command -v awww >/dev/null 2>&1 || ! command -v awww-daemon >/dev/null 2>&1; then
+    notify_error "awww is not installed"
+    exit 1
+fi
+
+if ! awww query >/dev/null 2>&1; then
+    awww-daemon >/dev/null 2>&1 &
+    for _ in {1..20}; do
+        awww query >/dev/null 2>&1 && break
+        sleep 0.1
+    done
+fi
+
+index=$((RANDOM % ${#images[@]}))
+awww img "${images[$index]}" \
+    --transition-type grow \
+    --transition-pos center \
+    --transition-fps 60 \
+    --transition-duration 1.2 \
+    --transition-bezier '0.20,0.80,0.20,1.00'
