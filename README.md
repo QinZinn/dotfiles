@@ -61,7 +61,7 @@ Run the printed root commands, then log out and back in.
 | `Super + M` | Wlogout |
 | `Super + Shift + S` | Screenshot region (clipboard) |
 | `Super + Shift + W` | Change wallpaper (random) |
-| `Super + Shift + G` | Pick wallpaper (rofi) |
+| `Super + Shift + G` | Pick wallpaper (waypaper) |
 | `Super + 1..9,0` | Switch workspace |
 | `Super + Alt + 1..9,0` | Move window to workspace |
 | `Super + Shift + 1..9,0` | Move window to workspace |

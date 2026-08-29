@@ -228,7 +228,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "Open f
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"), { description = "Lock screen" })
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout"), { description = "Open power menu" })
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper), { description = "Change wallpaper" })
-hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-wallpaper-picker"), { description = "Pick wallpaper" })
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("waypaper"), { description = "Pick wallpaper" })
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("killall -SIGUSR2 waybar"), { description = "Reload Waybar" })
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-screenshot"), { description = "Copy screenshot selection" })
 

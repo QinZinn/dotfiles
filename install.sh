@@ -10,7 +10,7 @@ HOME_DIR="$DOTFILES_DIR/home"
 echo "==> Installing packages"
 sudo pacman -S --needed \
   hyprland hypridle hyprlock waybar rofi swaync xdg-desktop-portal-hyprland \
-  awww grim slurp wl-clipboard cliphist brightnessctl playerctl \
+  awww waypaper grim slurp wl-clipboard cliphist brightnessctl playerctl \
   network-manager-applet blueman polkit-kde-agent wlogout \
   thunar gvfs tumbler thunar-archive-plugin thunar-volman thunar-media-tags-plugin gvfs-mtp file-roller \
   qt5-wayland qt6-wayland qt5ct qt6ct kvantum kvantum-qt5 \
