@@ -76,6 +76,21 @@ button:hover {
     color: @nord0;
 }
 
+#workspaces .taskbar-window {
+    border-radius: 6px;
+    margin: 0 1px;
+    padding: 2px 4px;
+    transition: background-color 180ms ease;
+}
+
+#workspaces .taskbar-window:hover {
+    background: alpha(@nord9, 0.24);
+}
+
+#workspaces .taskbar-window.active {
+    background: @nord8;
+}
+
 #clock {
     color: @nord8;
     padding: 0 4px;
