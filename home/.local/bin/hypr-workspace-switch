@@ -14,4 +14,4 @@ else
     [[ "$target" -lt 1 ]] && target="$MAX"
 fi
 
-hyprctl dispatch workspace "$target"
+hyprctl dispatch "hl.dsp.focus({ workspace = $target })"
