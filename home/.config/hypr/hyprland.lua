@@ -246,6 +246,10 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspa
 
 hl.bind(mainMod .. " + left", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch prev"), { description = "Previous workspace" })
 hl.bind(mainMod .. " + right", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch next"), { description = "Next workspace" })
+hl.bind(mainMod .. " + ALT + left", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch move-prev"), { description = "Move window to previous workspace" })
+hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch move-next"), { description = "Move window to next workspace" })
+hl.bind(mainMod .. " + ALT + mouse_up", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch move-prev"), { description = "Move window to previous workspace" })
+hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.exec_cmd("$HOME/.local/bin/hypr-workspace-switch move-next"), { description = "Move window to next workspace" })
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

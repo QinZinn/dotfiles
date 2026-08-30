@@ -87,6 +87,8 @@ A Waybar module (`󰔎`/`󰑘`) toggles between a static wallpaper and a slidesh
 | `Super + Shift + 1..9,0` | Move window to workspace |
 | `Super + Left/Right` | Previous/next workspace |
 | `Super + Mouse wheel` | Next/previous workspace |
+| `Super + Alt + Left/Right` | Move window to prev/next workspace |
+| `Super + Alt + Mouse wheel` | Move window to prev/next workspace |
 
 ## App theming
 
